@@ -1,0 +1,12 @@
+.popup__content_place_image{
+    width: auto;
+    border-radius: 0;
+    background-color: transparent;
+    
+}
+
+@media screen and (max-width:640px){
+    .popup__content{
+        width: auto;
+    }
+}

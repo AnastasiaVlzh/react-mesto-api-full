@@ -1,0 +1,8 @@
+.element__picture{
+    grid-area: picture;
+    object-fit: cover;
+    min-height: 282px;
+    height: 282px;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+}

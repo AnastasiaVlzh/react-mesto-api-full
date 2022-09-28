@@ -1,0 +1,13 @@
+.profile__edit {
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    grid-area: avatar;
+}
+
+.profile__edit:hover {
+    opacity: 1;
+    background: url(../../../images/Edit-avatar.svg) no-repeat 50% 50% rgba(0, 0, 0, .8);
+    transition: opacity linear .3s;
+    cursor: pointer;
+}

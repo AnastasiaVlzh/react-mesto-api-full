@@ -1,0 +1,9 @@
+.popup__form-confirm{
+    height: 200px;
+    margin-top:-15px;
+}
+@media screen and (max-width:640px){
+    .popup__form-confirm{
+        margin-top: 5px;
+    }
+}

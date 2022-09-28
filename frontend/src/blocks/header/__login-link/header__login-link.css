@@ -1,0 +1,11 @@
+.header__login-link{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    bottom: 40px;
+    right: 0px;
+    cursor: pointer;
+    position: absolute;
+    text-decoration: none;
+}

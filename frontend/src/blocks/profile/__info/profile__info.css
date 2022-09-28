@@ -1,0 +1,28 @@
+.profile__info{
+    display: grid;
+    grid-template-areas: 
+    "avatar user-name edit-button"
+    "avatar description descriprion";
+    column-gap: 25px;
+    row-gap: 16px;
+}
+@media screen and (max-width:1045px) and (min-width:724px){
+    .profile__info{
+        align-items: center;
+        justify-items: center;
+        row-gap: 22px;
+        column-gap: 10px;
+    }
+}
+@media screen and (max-width:640px){
+    .profile__info{
+        grid-template-areas: 
+        "avatar avatar"
+        "user-name edit-button"
+        "description description";
+        align-items: end;
+        justify-items: center;
+        row-gap: 14px;
+        column-gap: 10px;
+    }
+}

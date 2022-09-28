@@ -1,0 +1,17 @@
+.register__button{
+    margin-bottom: 37px;
+    margin-left: 36px;
+    margin-right: 36px;
+    margin-top: 216px;
+    padding: 0;
+    width: 358px;
+    min-height: 50px;
+    background-color: #FFFFFF;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    border: none;
+}
