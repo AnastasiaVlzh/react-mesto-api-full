@@ -131,7 +131,8 @@ module.exports.login = async (req, res, next) => {
     res.cookie('jwt', token, {
       maxAge: 604800,
       httpOnly: true,
-      sameSite: true,
+      sameSite: 'none',
+      secure: true,
     });
     return res.status(200).send({ data: user.toJSON() });
   } catch (err) {
