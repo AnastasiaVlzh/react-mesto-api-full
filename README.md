@@ -3,8 +3,6 @@
   
 # Ссылки:
 IP: 51.250.89.165  
-
 Frontend https://anastasiavlzh.nomoredomains.sbs  
-
 Backend https://api.anastasiavlzh.nomoredomains.icu  
 
