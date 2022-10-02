@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://anastasiavlzh.nomoredomains.sbs'],
+    origin: ['http://anastasiavlzh.nomoredomains.sbs'],
     credentials: true,
   }),
 );
