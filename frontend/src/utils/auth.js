@@ -40,3 +40,14 @@ export const getContent = () => {
        return checkResponse(res)
     });
 };
+
+export const logout = () => {
+  return fetch(`${BASE_URL}/logout`, {
+    method: 'GET',
+    headers,
+    credentials: 'include'
+  })
+  .then((res) => {
+    return checkResponse(res)
+ });
+};

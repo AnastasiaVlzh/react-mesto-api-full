@@ -53,9 +53,9 @@ app.post('/signup', express.json(), celebrate({
   }),
 }), createUser);
 
-
-
 app.use(auth);
+
+app.get('/logout', logout);
 
 app.use(userRoutes);
 app.use(cardRoutes);

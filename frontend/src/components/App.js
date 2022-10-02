@@ -91,41 +91,25 @@ function App() {
       }
     }, [isLoggedIn,history]);
 
-    // React.useEffect(() => {
-    //   if (isLoggedIn) {
-    //     history.push('/');
-    //   }
-    // }, [isLoggedIn,history]);
-
-
-    // React.useEffect(() => {
-    //   tokenCheck();
-    // }, []);
-
-    
-//   React.useEffect(() => {
-//     api.getUserData()
-//       .then(result => {
-//         setСurrentUser(result);
-//       })
-//     //   .catch(err => {
-//     //     console.log(err);
-//     //   })
-//     // api.getCardsData()
-//     //   .then(result => {
-//     //     setCards(result);
-//     //   })
-//     //   .catch(err => {
-//     //     console.log(err);
-//     //   })
-// }, []);
-
     const onLogout = () => {
+      return auth
+      .logout()
+      .then(())
+
       setIsLoggedIn(false);
       history.push('/signin');
     };
-  
 
+    const onLogin = (data) => {
+      return auth
+        .authorize(data)
+        .then((res) => {
+          setIsLoggedIn(true);
+          setUserInfo( data.email )
+          console.log(userInfo)
+        })
+        .catch((err) => console.log(err));
+    }
 
   function handleEditAvatarClick(){
     setIsEditAvatarPopupOpen(true);
