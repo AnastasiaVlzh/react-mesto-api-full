@@ -1,9 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
-require('dotenv').config();
 const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
 const {
