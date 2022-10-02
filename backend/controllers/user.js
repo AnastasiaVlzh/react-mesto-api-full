@@ -141,3 +141,10 @@ module.exports.login = async (req, res, next) => {
     return next(new ServerError('Произошла ошибка'));
   }
 };
+
+module.exports.logout = (req, res) => {
+  res.clearCookie('jwt');
+  res.send({
+    status: 'Signed out',
+  });
+};

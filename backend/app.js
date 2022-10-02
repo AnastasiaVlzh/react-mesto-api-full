@@ -9,6 +9,7 @@ const cardRoutes = require('./routes/card');
 const {
   login,
   createUser,
+  logout,
 } = require('./controllers/user');
 const { auth } = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
@@ -51,6 +52,8 @@ app.post('/signup', express.json(), celebrate({
     password: Joi.string().required(),
   }),
 }), createUser);
+
+
 
 app.use(auth);
 
