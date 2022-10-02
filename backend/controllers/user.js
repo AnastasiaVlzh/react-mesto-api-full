@@ -7,7 +7,7 @@ const ServerError = require('../errors/server-err');
 const AuthError = require('../errors/auth-err');
 const EmailError = require('../errors/email-err');
 
-const { NODE_ENV, JWT_SECRET = 'secret-key' } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = async (req, res, next) => {
   const {
