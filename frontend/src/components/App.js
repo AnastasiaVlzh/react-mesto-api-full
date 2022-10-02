@@ -45,16 +45,6 @@ function App() {
         })
     };
 
-    // const tokenCheck = () => {
-    //   api
-    //   .getUserData()
-    //   .then((res) => {
-    //     setUserInfo( res.data.email );
-    //     setIsLoggedIn(true);
-    //   })
-    //   .catch((err) => console.log(err));
-    //   };
-
     const onLogin = (data) => {
       return auth
         .authorize(data)
@@ -94,22 +84,12 @@ function App() {
     const onLogout = () => {
       return auth
       .logout()
-      .then(())
-
-      setIsLoggedIn(false);
-      history.push('/signin');
+      .then(()=> {
+        setIsLoggedIn(false);
+        history.push('/signin');
+      })
+      .catch((err) => console.log(err));
     };
-
-    const onLogin = (data) => {
-      return auth
-        .authorize(data)
-        .then((res) => {
-          setIsLoggedIn(true);
-          setUserInfo( data.email )
-          console.log(userInfo)
-        })
-        .catch((err) => console.log(err));
-    }
 
   function handleEditAvatarClick(){
     setIsEditAvatarPopupOpen(true);
