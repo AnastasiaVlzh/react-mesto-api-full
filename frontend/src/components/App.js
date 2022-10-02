@@ -83,13 +83,13 @@ function App() {
 
     const onLogout = () => {
       return auth
-      .logout()
-      .then(()=> {
-        setIsLoggedIn(false);
-        history.push('/signin');
-      })
-      .catch((err) => console.log(err));
-    };
+        .logout()
+        .then(() => {
+          setIsLoggedIn(false);
+          history.push('/signin');
+        })
+        .catch((err) => console.log(err));
+    }
 
   function handleEditAvatarClick(){
     setIsEditAvatarPopupOpen(true);
