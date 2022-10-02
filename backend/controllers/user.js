@@ -128,7 +128,7 @@ module.exports.login = async (req, res, next) => {
     if (!userValid) {
       return next(new AuthError('Неправильные почта или пароль'));
     }
-    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');
+    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
 
     res.cookie('jwt', token, {
       maxAge: 604800,
