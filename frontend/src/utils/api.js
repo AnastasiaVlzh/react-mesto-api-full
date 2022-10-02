@@ -98,4 +98,4 @@ export class Api{
 
 }
 
-export const api = new Api('http://api.anastasiavlzh.nomoredomains.icu');
+export const api = new Api('https://api.anastasiavlzh.nomoredomains.icu');

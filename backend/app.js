@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://anastasiavlzh.nomoredomains.sbs'],
+    origin: ['https://anastasiavlzh.nomoredomains.sbs'],
     credentials: true,
   }),
 );
