@@ -98,4 +98,4 @@ export class Api{
 
 }
 
-export const api = new Api('http://localhost:4000', 'http://api.anastasiavlzh.nomoredomains.icu');
+export const api = new Api('http://api.anastasiavlzh.nomoredomains.icu');
