@@ -27,6 +27,29 @@ module.exports.getCards = async (req, res, next) => {
   }
 };
 
+// module.exports.deleteCard = async (req, res, next) => {
+//   const { cardId } = req.params;
+//   const id = req.user._id;
+//   try {
+//     const card = await Card.findById(
+//       cardId,
+//       { new: true, runValidators: true },
+//     );
+//     if (!card) {
+//       return next(new NotFoundError('Такой карточки нет'));
+//     }
+//     if (id !== card.owner.toString()) {
+//       return next(new CardError('Данная карточка создана не вами'));
+//     }
+//     return res.status(200).send(card);
+//   } catch (err) {
+//     if (err.kind === 'ObjectId') {
+//       return next(new BadRequestError('Некорректные данные запроса'));
+//     }
+//     return next(new ServerError('Произошла ошибка'));
+//   }
+// };
+
 module.exports.deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
   const id = req.user._id;
@@ -41,13 +64,18 @@ module.exports.deleteCard = async (req, res, next) => {
     if (id !== card.owner.toString()) {
       return next(new CardError('Данная карточка создана не вами'));
     }
-    const deleteCard = await Card.remove();
     return res.status(200).send(card);
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return next(new BadRequestError('Некорректные данные запроса'));
     }
     return next(new ServerError('Произошла ошибка'));
+  } finally {
+    const deleteCard = await Card.findByIdAndDelete(
+      cardId,
+      { new: true, runValidators: true },
+    );
+    return res.status(200).send(deleteCard);
   }
 };
 
