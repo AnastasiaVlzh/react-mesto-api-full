@@ -62,7 +62,7 @@ module.exports.deleteCard = async (req, res, next) => {
       return next(new NotFoundError('Такой карточки нет'));
     }
     if (id === card.owner.toString()) {
-      const deleteCard = await Card.findByIdAndDelete(cardId);
+      const deleteCard = await Card.remove(cardId);
       return res.status(200).send(deleteCard);
       //return next(new CardError('Данная карточка создана не вами'));
     }
