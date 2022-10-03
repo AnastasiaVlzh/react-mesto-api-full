@@ -61,12 +61,9 @@ module.exports.deleteCard = async (req, res, next) => {
       throw new CardError('Данная карточка создана не вами');
     }
     const myCard = await Card.findByIdAndDelete(req.params.cardId);
-    return res.send({ data: myCard });
+    res.send({ data: myCard });
   } catch (err) {
-    if (err.kind === 'ObjectId') {
-      return next(new BadRequestError('Некорректные данные запроса'));
-    }
-    return next(new ServerError('Произошла ошибка'));
+    next(err);
   }
 };
 
