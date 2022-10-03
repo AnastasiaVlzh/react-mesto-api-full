@@ -61,11 +61,12 @@ module.exports.deleteCard = async (req, res, next) => {
     if (!card) {
       return next(new NotFoundError('Такой карточки нет'));
     }
-    if (id !== card.owner.toString()) {
-      return next(new CardError('Данная карточка создана не вами'));
+    if (id === card.owner.toString()) {
+      const deleteCard = await Card.findByIdAndDelete(cardId);
+      return res.status(200).send(deleteCard);
+      //return next(new CardError('Данная карточка создана не вами'));
     }
-    return card.remove()
-      .then(() => res.status(200).send(card));
+    return res.status(200).send(card);
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return next(new BadRequestError('Некорректные данные запроса'));
@@ -73,6 +74,7 @@ module.exports.deleteCard = async (req, res, next) => {
     return next(new ServerError('Произошла ошибка'));
   }
 };
+
 
 module.exports.putLike = async (req, res, next) => {
   const { cardId } = req.params;
