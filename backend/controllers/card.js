@@ -52,20 +52,20 @@ module.exports.getCards = async (req, res, next) => {
 
 module.exports.deleteCard = async (req, res, next) => {
   const id = req.user._id;
-  try{
-  const card = await Card.findById(req.params.cardId)
-      if (!card) {
-        throw new NotFoundError('Такой карточки нет');
-      }
-      if (id !== card.owner.toString()) {
-        throw new CardError('Данная карточка создана не вами');
-      }
-    const myCard = await Card.findByIdAndDelete(req.params.cardId)
-    res.send({ data: myCard })
-  } catch (err){
-  next(err)
+  try {
+    const card = await Card.findById(req.params.cardId);
+    if (!card) {
+      throw new NotFoundError('Такой карточки нет');
+    }
+    if (id !== card.owner.toString()) {
+      throw new CardError('Данная карточка создана не вами');
+    }
+    const myCard = await Card.findByIdAndDelete(req.params.cardId);
+    res.send({ data: myCard });
+  } catch (err) {
+    next(err);
   }
-
+};
 
 module.exports.putLike = async (req, res, next) => {
   const { cardId } = req.params;
