@@ -43,9 +43,8 @@ module.exports.getUsers = async (req, res, next) => {
     const users = await User.find({});
     return res.status(200).send(users);
   } catch (err) {
-    next(new AuthError('Ошибка авторизации'));
+    return next(new ServerError('Произошла ошибка'));
   }
-  return next(new ServerError('Произошла ошибка'));
 };
 
 module.exports.getUserMe = async (req, res, next) => {

@@ -13,6 +13,7 @@ const {
 } = require('./controllers/user');
 const { auth } = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 4000 } = process.env;
 
@@ -26,6 +27,8 @@ app.use(
 );
 
 app.use(cookieParser());
+
+app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -63,6 +66,8 @@ app.use(cardRoutes);
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
