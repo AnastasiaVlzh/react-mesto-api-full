@@ -50,33 +50,22 @@ module.exports.getCards = async (req, res, next) => {
 //   }
 // };
 
-module.exports.deleteCard = (req, res, next) => {
+module.exports.deleteCard = async (req, res, next) => {
   const id = req.user._id;
-  Card.findById(req.params.cardId)
-    .then((card) => {
+  try{
+  const card = await Card.findById(req.params.cardId)
       if (!card) {
         throw new NotFoundError('Такой карточки нет');
       }
-
       if (id !== card.owner.toString()) {
         throw new CardError('Данная карточка создана не вами');
       }
-      Card.findByIdAndDelete(req.params.cardId)
-        .then((mycard) => res.send({ data: mycard }))
-        .catch((err) => {
-          if (err.name === 'CastError') {
-            return next(new BadRequestError('Некорректные данные запроса'));
-          }
-          return next(err);
-        });
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        return next(new BadRequestError('Некорректные данные запроса'));
-      }
-      return next(err);
-    });
-};
+    const myCard = await Card.findByIdAndDelete(req.params.cardId)
+    res.send({ data: myCard })
+  } catch (err){
+  next(err)
+  }
+
 
 module.exports.putLike = async (req, res, next) => {
   const { cardId } = req.params;
