@@ -31,7 +31,7 @@ module.exports.deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
   const id = req.user._id;
   try {
-    const card = await Card.findById(
+    const card = await Card.findByIdAndDelete(
       cardId,
       { new: true, runValidators: true },
     );
