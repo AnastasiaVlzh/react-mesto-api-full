@@ -43,7 +43,7 @@ module.exports.getUsers = async (req, res, next) => {
     const users = await User.find({});
     return res.status(200).send(users);
   } catch (err) {
-    return next(new ServerError('Произошла ошибка'));
+    return next;
   }
   //return next(new ServerError('Произошла ошибка'));
 };
