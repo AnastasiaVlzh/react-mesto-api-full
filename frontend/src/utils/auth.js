@@ -3,7 +3,6 @@ export const BASE_URL = 'https://api.anastasiavlzh.nomoredomains.icu';
 
 const checkResponse = (response) => {
   return response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}: ${response.statusText}`);
-  //return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
 };
 
 const headers = {
