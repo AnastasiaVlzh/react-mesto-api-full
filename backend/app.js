@@ -25,7 +25,7 @@ app.use(
     credentials: true,
   }),
 );
-app.use(requestLogger);
+//app.use(requestLogger);
 
 app.use(cookieParser());
 
@@ -66,7 +66,7 @@ app.all('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
-app.use(errorLogger);
+//app.use(errorLogger);
 
 app.use(errors());
 
