@@ -50,28 +50,32 @@ module.exports.getCards = async (req, res, next) => {
 //   }
 // };
 
-module.exports.deleteCard = async (req, res, next) => {
-  const { cardId } = req.params;
+module.exports.deleteCard = (req, res, next) => {
   const id = req.user._id;
-  try {
-    const card = await Card.findById(
-      cardId,
-      { new: true, runValidators: true },
-    );
-    if (!card) {
-      return next(new NotFoundError('Такой карточки нет'));
-    }
-    if (id === card.owner.toString()) {
-      return card.remove();
-      //return next(new CardError('Данная карточка создана не вами'));
-    }
-    return res.status(200).send(card);
-  } catch (err) {
-    if (err.kind === 'ObjectId') {
-      return next(new BadRequestError('Некорректные данные запроса'));
-    }
-    return next(new ServerError('Произошла ошибка'));
-  }
+  Card.findById(req.params.cardId)
+    .then((card) => {
+      if (!card) {
+        throw new NotFoundError('Такой карточки нет');
+      }
+
+      if (id !== card.owner.toString()) {
+        throw new CardError('Данная карточка создана не вами');
+      }
+      Card.findByIdAndDelete(req.params.cardId)
+        .then((mycard) => res.send({ data: mycard }))
+        .catch((err) => {
+          if (err.name === 'CastError') {
+            return next(new BadRequestError('Некорректные данные запроса'));
+          }
+          return next(err);
+        });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('Некорректные данные запроса'));
+      }
+      return next(err);
+    });
 };
 
 module.exports.putLike = async (req, res, next) => {
