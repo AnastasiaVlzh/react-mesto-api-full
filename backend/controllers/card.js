@@ -31,7 +31,7 @@ module.exports.deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
   const id = req.user._id;
   try {
-    const card = await Card.findByIdAndRemove(
+    const card = await Card.findById(
       cardId,
       { new: true, runValidators: true },
     );
@@ -41,6 +41,7 @@ module.exports.deleteCard = async (req, res, next) => {
     if (id !== card.owner.toString()) {
       return next(new CardError('Данная карточка создана не вами'));
     }
+    const deleteCard = await Card.remove();
     return res.status(200).send(card);
   } catch (err) {
     if (err.kind === 'ObjectId') {
