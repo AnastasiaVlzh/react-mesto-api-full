@@ -61,14 +61,13 @@ module.exports.deleteCard = async (req, res, next) => {
     if (!card) {
       return next(new NotFoundError('Такой карточки нет'));
     }
-    const deleteCard = await Card.remove(
-      cardId,
-      { new: true, runValidators: true },
-    );
-    if (id !== deleteCard.owner.toString()) {
+    if (id !== card.owner.toString()) {
       return next(new CardError('Данная карточка создана не вами'));
     }
-    return res.status(200).send(card);
+    return card.remove()
+    .then(() => res.status(200).send(card)
+    )
+    //
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return next(new BadRequestError('Некорректные данные запроса'));
