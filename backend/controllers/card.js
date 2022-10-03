@@ -27,44 +27,19 @@ module.exports.getCards = async (req, res, next) => {
   }
 };
 
-module.exports.deleteCard = async (req, res, next) => {
-  const { cardId } = req.params;
-  const id = req.user._id;
-  try {
-    const card = await Card.findByIdAndDelete(
-      cardId,
-      { new: true, runValidators: true },
-    );
-    if (!card) {
-      return next(new NotFoundError('Такой карточки нет'));
-    }
-    if (id !== card.owner.toString()) {
-      return next(new CardError('Данная карточка создана не вами'));
-    }
-    return res.status(200).send(card);
-  } catch (err) {
-    if (err.kind === 'ObjectId') {
-      return next(new BadRequestError('Некорректные данные запроса'));
-    }
-    return next(new ServerError('Произошла ошибка'));
-  }
-};
-
 // module.exports.deleteCard = async (req, res, next) => {
 //   const { cardId } = req.params;
 //   const id = req.user._id;
 //   try {
-//     const card = await Card.findById(
+//     const card = await Card.findByIdAndDelete(
 //       cardId,
 //       { new: true, runValidators: true },
 //     );
 //     if (!card) {
 //       return next(new NotFoundError('Такой карточки нет'));
 //     }
-//     if (id === card.owner.toString()) {
-//       const deleteCard = await Card.remove(cardId);
-//       return res.status(200).send(deleteCard);
-//       //return next(new CardError('Данная карточка создана не вами'));
+//     if (id !== card.owner.toString()) {
+//       return next(new CardError('Данная карточка создана не вами'));
 //     }
 //     return res.status(200).send(card);
 //   } catch (err) {
@@ -74,6 +49,30 @@ module.exports.deleteCard = async (req, res, next) => {
 //     return next(new ServerError('Произошла ошибка'));
 //   }
 // };
+
+module.exports.deleteCard = async (req, res, next) => {
+  const { cardId } = req.params;
+  const id = req.user._id;
+  try {
+    const card = await Card.findById(
+      cardId,
+      { new: true, runValidators: true },
+    );
+    if (!card) {
+      return next(new NotFoundError('Такой карточки нет'));
+    }
+    if (id === card.owner.toString()) {
+      return card.remove();
+      //return next(new CardError('Данная карточка создана не вами'));
+    }
+    return res.status(200).send(card);
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return next(new BadRequestError('Некорректные данные запроса'));
+    }
+    return next(new ServerError('Произошла ошибка'));
+  }
+};
 
 module.exports.putLike = async (req, res, next) => {
   const { cardId } = req.params;
