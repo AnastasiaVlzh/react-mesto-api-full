@@ -25,7 +25,6 @@ app.use(
     credentials: true,
   }),
 );
-app.use(requestLogger);
 
 app.use(cookieParser());
 
@@ -34,6 +33,8 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.use(requestLogger);
 
 app.post('/signin', express.json(), celebrate({
   body: Joi.object().keys({
