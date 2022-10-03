@@ -65,9 +65,7 @@ module.exports.deleteCard = async (req, res, next) => {
       return next(new CardError('Данная карточка создана не вами'));
     }
     return card.remove()
-    .then(() => res.status(200).send(card)
-    )
-    //
+      .then(() => res.status(200).send(card));
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return next(new BadRequestError('Некорректные данные запроса'));
