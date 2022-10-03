@@ -75,7 +75,6 @@ module.exports.deleteCard = async (req, res, next) => {
   }
 };
 
-
 module.exports.putLike = async (req, res, next) => {
   const { cardId } = req.params;
   try {
