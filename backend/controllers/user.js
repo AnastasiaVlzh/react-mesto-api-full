@@ -45,6 +45,7 @@ module.exports.getUsers = async (req, res, next) => {
   } catch (err) {
     return next(new ServerError('Произошла ошибка'));
   }
+  //return next(new ServerError('Произошла ошибка'));
 };
 
 module.exports.getUserMe = async (req, res, next) => {

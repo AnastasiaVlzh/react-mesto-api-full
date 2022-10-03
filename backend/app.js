@@ -25,10 +25,9 @@ app.use(
     credentials: true,
   }),
 );
+app.use(requestLogger);
 
 app.use(cookieParser());
-
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
