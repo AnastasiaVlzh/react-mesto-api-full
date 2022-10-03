@@ -36,6 +36,8 @@ app.get('/crash-test', () => {
 
 app.use(requestLogger);
 
+app.get('/logout', logout);
+
 app.post('/signin', express.json(), celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -55,8 +57,6 @@ app.post('/signup', express.json(), celebrate({
     password: Joi.string().required(),
   }),
 }), createUser);
-
-app.get('/logout', logout);
 
 app.use(auth);
 
