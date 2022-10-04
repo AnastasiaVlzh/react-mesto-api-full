@@ -29,16 +29,16 @@ export const authorize = ({ email, password }) => {
     .then(res => checkResponse(res));
 };
 
-export const getContent = () => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    headers,
-    credentials:"include",
-  })
-    .then((res) => {
-       return checkResponse(res)
-    });
-};
+// export const getContent = () => {
+//   return fetch(`${BASE_URL}/users/me`, {
+//     method: 'GET',
+//     headers,
+//     credentials:"include",
+//   })
+//     .then((res) => {
+//        return checkResponse(res)
+//     });
+// };
 
 export const logout = () => {
   return fetch(`${BASE_URL}/logout`, {
