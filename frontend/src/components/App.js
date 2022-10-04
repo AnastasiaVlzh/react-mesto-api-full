@@ -86,6 +86,8 @@ function App() {
         .logout()
         .then(() => {
           setIsLoggedIn(false);
+          setUserInfo('')
+          console.log(userInfo)
           history.push('/signin');
         })
         .catch((err) => console.log(err));
