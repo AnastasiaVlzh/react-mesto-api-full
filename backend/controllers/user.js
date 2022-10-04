@@ -140,9 +140,18 @@ module.exports.login = async (req, res, next) => {
   }
 };
 
-module.exports.logout = (req, res) => {
-  res.clearCookie('jwt');
-  res.send({
-    status: 'Signed out',
-  });
+// module.exports.logout = (req, res) => {
+//   res.clearCookie('jwt');
+//   res.send({
+//     status: 'Signed out',
+//   });
+// };
+
+module.exports.logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt');
+    return res.status(200).send({ message: 'Выполнен выход' });
+  } catch (err) {
+    return next(new ServerError('Произошла ошибка'));
+  }
 };
