@@ -149,7 +149,7 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
   try {
-    res.clearCookie('jwt');
+    res.clearCookie('jwt', { sameSite: "None", secure: true });
     return res.status(200).send({ message: 'Выполнен выход' });
   } catch (err) {
     return next(new ServerError('Произошла ошибка'));

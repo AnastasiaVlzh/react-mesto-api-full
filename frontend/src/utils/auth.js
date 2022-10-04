@@ -44,9 +44,10 @@ export const logout = () => {
   return fetch(`${BASE_URL}/logout`, {
     method: 'GET',
     headers,
-    credentials: 'include'
+    credentials: "include",
   })
   .then((res) => {
     return checkResponse(res)
  });
 };
+  
